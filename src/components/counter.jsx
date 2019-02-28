@@ -2,28 +2,38 @@ import React, { Component } from 'react';
 
 
 class Counter extends Component {
-    state = {
-      count: 0,
-      imgUrl: "https://placeimg.com/200/200/people?t=1551193612167",
-       cities: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide']
-    };
-
-    //  styles = {
-    //      fontSize: 20,
-    //      fontWeight: "bold"
-    //  };
-
-
-   
-    render() { 
+  constructor(){
+    super();
+    this.state = {
+        count: 0,
+        imgUrl: "https://placeimg.com/200/200/people?t=1551193612167",
+        cities: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide']
+       };
+       this.handleIncrement = this.handleIncrement.bind(this);
+    
+      }
+      //  handleIncrement = () => {
+      //    this.setState({ count: this.state.count + 1 });
+      //  };
 
       
-       
+    handleIncrement(){
+      this.setState( (prev) => {
+         return {
+           count: prev.count + 1 
+         }
+       })
+    }
+
+    render() { 
         return (  
             <div className="container">
             <img src={this.state.imgUrl} alt="beauty" />
-            <span style={ { fontSize: 30 }}  className={this.getBadgeClasses()}>{this.formatCount()}</span>
-            <button className="btn btn-primary btn-lg">Increment</button>
+            <span style={{fontSize: 30 }}  className={this.getBadgeClasses()}>{this.formatCount()}</span>
+            <button 
+            onClick={this.handleIncrement }
+            className="btn btn-primary btn-lg">Increment</button>
+            
              <ul>
                {this.state.cities.length === 0 && "No more cities on earth"}
               {this.aussieCities()}
